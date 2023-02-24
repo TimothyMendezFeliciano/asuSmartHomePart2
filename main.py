@@ -9,6 +9,7 @@ import numpy as np
 import os
 import tensorflow as tf
 import frameextractor
+import csv
 import handshape_feature_extractor as handshape
 
 ## import the handfeature extractor class
@@ -44,15 +45,15 @@ for filename in os.listdir(trainMiddleFramesDirectory):
 # =============================================================================
 # your code goes here 
 # Extract the middle frame of each gesture video
-for filename in os.listdir(testDirectory):
-    file = os.path.join(testDirectory, filename)
-    frameextractor.frameExtractor(file, testMiddleFramesDirectory, testCount)
-    testCount = testCount + 1
+# for filename in os.listdir(testDirectory):
+#     file = os.path.join(testDirectory, filename)
+#     frameextractor.frameExtractor(file, testMiddleFramesDirectory, testCount)
+#     testCount = testCount + 1
 
-for filename in os.listdir(testMiddleFramesDirectory):
-    file = os.path.join(testMiddleFramesDirectory, filename)
-    image = cv2.imread(file, cv2.IMREAD_GRAYSCALE)
-    testVectorList.append(handshapeObj.extract_feature(handshapeObj.get_instance(), image))
+# for filename in os.listdir(testMiddleFramesDirectory):
+#     file = os.path.join(testMiddleFramesDirectory, filename)
+#     image = cv2.imread(file, cv2.IMREAD_GRAYSCALE)
+#     testVectorList.append(handshapeObj.extract_feature(handshapeObj.get_instance(), image))
 
 # =============================================================================
 # Recognize the gesture (use cosine similarity for comparing the vectors)
