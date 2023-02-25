@@ -53,6 +53,7 @@ def find_comparable_vectors(lookup_key, dictionary) -> []:
     result = []
     for key in dictionary:
         print(lookup_key, key)
+        # TODO: For some reason the lookup_key is being assing as None. Gotta figure this out.
         if lookup_key is not None:
             if lookup_key in key:
                 result.append(dictionary[key])
