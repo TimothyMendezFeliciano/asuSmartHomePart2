@@ -71,6 +71,7 @@ for key, value in testVectorList.items():
     with open('results.csv', 'w', newline='') as results_file:
         headers = ['Gesture_File', 'Gesture_Name', 'Output_Label']
         file_writer = csv.DictWriter(results_file, fieldnames=headers)
+        file_writer.writeheader()
         file_writer.writerow({
             'Gesture_File': key,
             'Gesture_Name': key.replace("H-", ""),
@@ -78,3 +79,4 @@ for key, value in testVectorList.items():
         })
 
 #         TODO: FINISH THIS.
+# TODO: Figure Out Why only two values get written
