@@ -59,22 +59,21 @@ for filename in os.listdir(testDirectory):
 # Recognize the gesture (use cosine similarity for comparing the vectors)
 # =============================================================================
 
-for key, value in testVectorList.items():
-    minimum_cosine_difference = 1
-    trainDataEquivalentKey = find_train_data_equivalent_key(key)
-    for compareValue in find_comparable_vectors(trainDataEquivalentKey, trainVectorList):
-        calculated_difference = tf.keras.losses.cosine_similarity(
-            value, compareValue, axis=-1
-        )
-        if calculated_difference < minimum_cosine_difference:
-            minimum_cosine_difference = calculated_difference
-    with open('results.csv', 'w', newline='') as results_file:
-        headers = ['Gesture_File', 'Gesture_Name', 'Output_Label']
-        file_writer = csv.DictWriter(results_file, fieldnames=headers)
-        file_writer.writeheader()
+with open('Results.csv', 'w', newline='') as results_file:
+    headers = ['Output_Label']
+    file_writer = csv.DictWriter(results_file, fieldnames=headers)
+    file_writer.writeheader()
+    for key, value in testVectorList.items():
+        minimum_cosine_difference = 1
+        trainDataEquivalentKey = find_train_data_equivalent_key(key)
+        for compareValue in find_comparable_vectors(trainDataEquivalentKey, trainVectorList):
+            calculated_difference = tf.keras.losses.cosine_similarity(
+                value, compareValue, axis=-1
+            )
+            print(calculated_difference)
+            if calculated_difference < minimum_cosine_difference:
+                minimum_cosine_difference = calculated_difference
         file_writer.writerow({
-            'Gesture_File': key,
-            'Gesture_Name': key.replace("H-", ""),
             'Output_Label': minimum_cosine_difference
         })
 
