@@ -77,5 +77,3 @@ with open('Results.csv', 'w', newline='') as results_file:
             'Output_Label': minimum_cosine_difference
         })
 
-#         TODO: FINISH THIS.
-# TODO: Figure Out Why only two values get written
