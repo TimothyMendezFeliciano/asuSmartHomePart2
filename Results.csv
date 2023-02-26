@@ -1,18 +1,18 @@
 Output_Label
-"tf.Tensor([-0.00261749], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.02382184], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.00335262], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.00338075], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.00135172], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.01227861], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.27485463], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.9878289], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.00050818], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.9968662], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.00215641], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.00071882], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.31087622], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.02587432], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.01650318], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.93645716], shape=(1,), dtype=float32)"
-"tf.Tensor([-0.05091096], shape=(1,), dtype=float32)"
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+12
+11
+13
+14
+15
+16

@@ -11,7 +11,8 @@ import tensorflow as tf
 import frameextractor
 import csv
 import handshape_feature_extractor as handshape
-from utils import define_gesture, last_file_in_folder, find_train_data_equivalent_key, find_comparable_vectors
+from utils import define_gesture, last_file_in_folder, find_train_data_equivalent_key, find_comparable_vectors, \
+    return_correct_label
 
 ## import the handfeature extractor class
 
@@ -39,7 +40,7 @@ for filename in os.listdir(trainingDirectory):
 # =============================================================================
 # Get the penultimate layer for test data
 # =============================================================================
-# your code goes here 
+# your code goes here
 # Extract the middle frame of each gesture video
 
 testDirectory = 'test/'
@@ -65,15 +66,17 @@ with open('Results.csv', 'w', newline='') as results_file:
     file_writer.writeheader()
     for key, value in testVectorList.items():
         minimum_cosine_difference = 1
+        correct_label = key
         trainDataEquivalentKey = find_train_data_equivalent_key(key)
-        for compareValue in find_comparable_vectors(trainDataEquivalentKey, trainVectorList):
+        for compareKey, compareValue in find_comparable_vectors(trainDataEquivalentKey, trainVectorList).items():
             calculated_difference = tf.keras.losses.cosine_similarity(
                 value, compareValue, axis=-1
             )
-            print(calculated_difference)
             if calculated_difference < minimum_cosine_difference:
                 minimum_cosine_difference = calculated_difference
+                correct_label = compareKey
+        # print("Splice/Split label", correct_label)
+        correct_label = return_correct_label(correct_label)
         file_writer.writerow({
-            'Output_Label': minimum_cosine_difference
+            'Output_Label': correct_label
         })
-
