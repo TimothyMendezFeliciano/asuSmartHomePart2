@@ -75,7 +75,6 @@ with open('Results.csv', 'w', newline='') as results_file:
             if calculated_difference < minimum_cosine_difference:
                 minimum_cosine_difference = calculated_difference
                 correct_label = compareKey
-        # print("Splice/Split label", correct_label)
         correct_label = return_correct_label(correct_label)
         file_writer.writerow({
             'Output_Label': correct_label
