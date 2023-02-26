@@ -22,20 +22,20 @@ from utils import define_gesture, last_file_in_folder, find_train_data_equivalen
 # your code goes here
 # Extract the middle frame of each gesture video
 
-trainingDirectory = 'traindata/'
-trainMiddleFramesDirectory = 'trainMiddleFrames/'
-trainCount = 0
-trainVectorList = {}
+training_directory = 'traindata/'
+train_middle_frames_directory = 'trainMiddleFrames/'
+train_count = 0
+train_vector_list = {}
 
-handshapeObj = handshape.HandShapeFeatureExtractor
-for filename in os.listdir(trainingDirectory):
-    file = os.path.join(trainingDirectory, filename)
-    frameextractor.frameExtractor(file, trainingDirectory + trainMiddleFramesDirectory, trainCount)
-    gesture = define_gesture(filename, trainCount)
-    lastFile = last_file_in_folder(trainingDirectory + trainMiddleFramesDirectory)
+handshape_obj = handshape.HandShapeFeatureExtractor
+for filename in os.listdir(training_directory):
+    file = os.path.join(training_directory, filename)
+    frameextractor.frameExtractor(file, training_directory + train_middle_frames_directory, train_count)
+    gesture = define_gesture(filename, train_count)
+    lastFile = last_file_in_folder(training_directory + train_middle_frames_directory)
     image = cv2.imread(lastFile, cv2.IMREAD_GRAYSCALE)
-    trainVectorList[gesture] = (handshapeObj.extract_feature(handshapeObj.get_instance(), image))
-    trainCount = trainCount + 1
+    train_vector_list[gesture] = (handshape_obj.extract_feature(handshape_obj.get_instance(), image))
+    train_count = train_count + 1
 
 # =============================================================================
 # Get the penultimate layer for test data
@@ -43,18 +43,18 @@ for filename in os.listdir(trainingDirectory):
 # your code goes here
 # Extract the middle frame of each gesture video
 
-testDirectory = 'test/'
-testMiddleFramesDirectory = 'testMiddleFrames/'
-testCount = 0
-testVectorList = {}
-for filename in os.listdir(testDirectory):
-    file = os.path.join(testDirectory, filename)
-    frameextractor.frameExtractor(file, testDirectory + testMiddleFramesDirectory, testCount)
-    gesture = define_gesture(filename, testCount)
-    lastFile = last_file_in_folder(testDirectory + testMiddleFramesDirectory)
+test_directory = 'test/'
+test_middle_frames_directory = 'testMiddleFrames/'
+test_count = 0
+test_vector_list = {}
+for filename in os.listdir(test_directory):
+    file = os.path.join(test_directory, filename)
+    frameextractor.frameExtractor(file, test_directory + test_middle_frames_directory, test_count)
+    gesture = define_gesture(filename, test_count)
+    lastFile = last_file_in_folder(test_directory + test_middle_frames_directory)
     image = cv2.imread(lastFile, cv2.IMREAD_GRAYSCALE)
-    testVectorList[gesture] = (handshapeObj.extract_feature(handshapeObj.get_instance(), image))
-    testCount = testCount + 1
+    test_vector_list[gesture] = (handshape_obj.extract_feature(handshape_obj.get_instance(), image))
+    test_count = test_count + 1
 
 # =============================================================================
 # Recognize the gesture (use cosine similarity for comparing the vectors)
@@ -64,11 +64,11 @@ with open('Results.csv', 'w', newline='') as results_file:
     headers = ['Output_Label']
     file_writer = csv.DictWriter(results_file, fieldnames=headers)
     file_writer.writeheader()
-    for key, value in testVectorList.items():
+    for key, value in test_vector_list.items():
         minimum_cosine_difference = 1
         correct_label = key
         trainDataEquivalentKey = find_train_data_equivalent_key(key)
-        for compareKey, compareValue in find_comparable_vectors(trainDataEquivalentKey, trainVectorList).items():
+        for compareKey, compareValue in find_comparable_vectors(trainDataEquivalentKey, train_vector_list).items():
             calculated_difference = tf.keras.losses.cosine_similarity(
                 value, compareValue, axis=-1
             )

@@ -11,8 +11,8 @@ def last_file_in_folder(directory):
     return os.path.join(directory, files[0])
 
 
-def find_train_data_equivalent_key(testVectorKey: str) -> str:
-    match testVectorKey.split('.')[0]:
+def find_train_data_equivalent_key(test_vector_key: str) -> str:
+    match test_vector_key.split('.')[0]:
         case "H-0":
             return "Num0"
         case "H-1":
