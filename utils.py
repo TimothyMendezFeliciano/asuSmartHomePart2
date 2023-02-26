@@ -50,41 +50,76 @@ def find_train_data_equivalent_key(test_vector_key: str) -> str:
 
 
 def return_correct_label(label: str) -> str:
-    key = label.split('-')[0]
-    if key == "Num0":
+    key = label.split('.')[0]
+    if key == "H-0":
         return "0"
-    if key == "Num1":
+    if key == "H-1":
         return "1"
-    if key == "Num2":
+    if key == "H-2":
         return "2"
-    if key == "Num3":
+    if key == "H-3":
         return "3"
-    if key == "Num4":
+    if key == "H-4":
         return "4"
-    if key == "Num5":
+    if key == "H-5":
         return "5"
-    if key == "Num6":
+    if key == "H-6":
         return "6"
-    if key == "Num7":
+    if key == "H-7":
         return "7"
-    if key == "Num8":
+    if key == "H-8":
         return "8"
-    if key == "Num9":
+    if key == "H-9":
         return "9"
-    if key == "FanDown":
+    if key == "H-DecreaseFanSpeed":
         return "10"
-    if key == "FanOff":
-        return "12"
-    if key == "FanOn":
+    if key == "H-FanOn":
         return "11"
-    if key == "FanUp":
+    if key == "H-FanOff":
+        return "12"
+    if key == "H-IncreaseFanSpeed":
         return "13"
-    if key == "LightOff":
+    if key == "H-LightOff":
         return "14"
-    if key == "LightOn":
+    if key == "H-LightOn":
         return "15"
-    if key == "SetThermo":
+    if key == "H-SetThermo":
         return "16"
+    # key = label.split('-')[0]
+    # if key == "Num0":
+    #     return "0"
+    # if key == "Num1":
+    #     return "1"
+    # if key == "Num2":
+    #     return "2"
+    # if key == "Num3":
+    #     return "3"
+    # if key == "Num4":
+    #     return "4"
+    # if key == "Num5":
+    #     return "5"
+    # if key == "Num6":
+    #     return "6"
+    # if key == "Num7":
+    #     return "7"
+    # if key == "Num8":
+    #     return "8"
+    # if key == "Num9":
+    #     return "9"
+    # if key == "FanDown":
+    #     return "10"
+    # if key == "FanOff":
+    #     return "12"
+    # if key == "FanOn":
+    #     return "11"
+    # if key == "FanUp":
+    #     return "13"
+    # if key == "LightOff":
+    #     return "14"
+    # if key == "LightOn":
+    #     return "15"
+    # if key == "SetThermo":
+    #     return "16"
 
 
 def find_comparable_vectors(lookup_key, dictionary) -> []:

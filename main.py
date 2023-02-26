@@ -60,15 +60,15 @@ for filename in os.listdir(test_directory):
 # Recognize the gesture (use cosine similarity for comparing the vectors)
 # =============================================================================
 
+ayyyyy = 0
 with open('Results.csv', 'w', newline='') as results_file:
     headers = ['Output_Label']
     file_writer = csv.DictWriter(results_file, fieldnames=headers)
-    # file_writer.writeheader()
-    for key, value in test_vector_list.items():
+    for key, value in train_vector_list.items():
         minimum_cosine_difference = 1
         correct_label = key
         trainDataEquivalentKey = find_train_data_equivalent_key(key)
-        for compareKey, compareValue in find_comparable_vectors(trainDataEquivalentKey, train_vector_list).items():
+        for compareKey, compareValue in test_vector_list.items():
             calculated_difference = tf.keras.losses.cosine_similarity(
                 value, compareValue, axis=-1
             )
@@ -76,6 +76,7 @@ with open('Results.csv', 'w', newline='') as results_file:
                 minimum_cosine_difference = calculated_difference
                 correct_label = compareKey
         correct_label = return_correct_label(correct_label)
+        ayyyyy = ayyyyy + 1
         file_writer.writerow({
             'Output_Label': correct_label
         })
