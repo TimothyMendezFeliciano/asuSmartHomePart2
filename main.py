@@ -30,9 +30,9 @@ train_vector_list = {}
 handshape_obj = handshape.HandShapeFeatureExtractor
 for filename in os.listdir(training_directory):
     file = os.path.join(training_directory, filename)
-    frameextractor.frameExtractor(file, training_directory + train_middle_frames_directory, train_count)
+    frameextractor.frameExtractor(file, train_middle_frames_directory, train_count)
     gesture = define_gesture(filename, train_count)
-    lastFile = last_file_in_folder(training_directory + train_middle_frames_directory)
+    lastFile = last_file_in_folder(train_middle_frames_directory)
     image = cv2.imread(lastFile, cv2.IMREAD_GRAYSCALE)
     train_vector_list[gesture] = (handshape_obj.extract_feature(handshape_obj.get_instance(), image))
     train_count = train_count + 1
@@ -49,9 +49,9 @@ test_count = 0
 test_vector_list = {}
 for filename in os.listdir(test_directory):
     file = os.path.join(test_directory, filename)
-    frameextractor.frameExtractor(file, test_directory + test_middle_frames_directory, test_count)
+    frameextractor.frameExtractor(file, test_middle_frames_directory, test_count)
     gesture = define_gesture(filename, test_count)
-    lastFile = last_file_in_folder(test_directory + test_middle_frames_directory)
+    lastFile = last_file_in_folder(test_middle_frames_directory)
     image = cv2.imread(lastFile, cv2.IMREAD_GRAYSCALE)
     test_vector_list[gesture] = (handshape_obj.extract_feature(handshape_obj.get_instance(), image))
     test_count = test_count + 1
@@ -63,7 +63,7 @@ for filename in os.listdir(test_directory):
 with open('Results.csv', 'w', newline='') as results_file:
     headers = ['Output_Label']
     file_writer = csv.DictWriter(results_file, fieldnames=headers)
-    file_writer.writeheader()
+    # file_writer.writeheader()
     for key, value in test_vector_list.items():
         minimum_cosine_difference = 1
         correct_label = key
