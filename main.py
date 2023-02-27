@@ -60,8 +60,8 @@ for filename in os.listdir(test_directory):
 # Recognize the gesture (use cosine similarity for comparing the vectors)
 # =============================================================================
 
-with open('Results.csv', 'w', newline='') as results_file:
-    headers = ['Output_Label']
+with open('Result.csv', 'w', newline='') as results_file:
+    headers = ['Output Label']
     file_writer = csv.DictWriter(results_file, fieldnames=headers)
     for key, value in train_vector_list.items():
         minimum_cosine_difference = 1
@@ -76,5 +76,5 @@ with open('Results.csv', 'w', newline='') as results_file:
                 correct_label = compareKey
         output_label = return_correct_label(correct_label)
         file_writer.writerow({
-            'Output_Label': output_label
+            'Output Label': output_label
         })

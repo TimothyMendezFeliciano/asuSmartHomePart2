@@ -49,42 +49,42 @@ def find_train_data_equivalent_key(test_vector_key: str) -> str:
         return "SetThermo"
 
 
-def return_correct_label(label: str) -> str:
+def return_correct_label(label: str) -> int:
     key = label.split('.')[0]
     if key == "H-0":
-        return "0"
+        return 0
     if key == "H-1":
-        return "1"
+        return 1
     if key == "H-2":
-        return "2"
+        return 2
     if key == "H-3":
-        return "3"
+        return 3
     if key == "H-4":
-        return "4"
+        return 4
     if key == "H-5":
-        return "5"
+        return 5
     if key == "H-6":
-        return "6"
+        return 6
     if key == "H-7":
-        return "7"
+        return 7
     if key == "H-8":
-        return "8"
+        return 8
     if key == "H-9":
-        return "9"
+        return 9
     if key == "H-DecreaseFanSpeed":
-        return "10"
+        return 10
     if key == "H-FanOn":
-        return "11"
+        return 11
     if key == "H-FanOff":
-        return "12"
+        return 12
     if key == "H-IncreaseFanSpeed":
-        return "13"
+        return 13
     if key == "H-LightOff":
-        return "14"
+        return 14
     if key == "H-LightOn":
-        return "15"
+        return 15
     if key == "H-SetThermo":
-        return "16"
+        return 16
     # key = label.split('-')[0]
     # if key == "Num0":
     #     return "0"
