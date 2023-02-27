@@ -1,8 +1,12 @@
 import os
 
 
-def define_gesture(filename: str, count) -> str:
+def define_train_gesture(filename: str, count) -> str:
     return filename.split('_')[0] + '-' + str(count)
+
+
+def define_test_gesture(filename: str, count) -> str:
+    return filename.split('-')[1].split('.')[0] + str(count)
 
 
 def last_file_in_folder(directory):
@@ -50,76 +54,41 @@ def find_train_data_equivalent_key(test_vector_key: str) -> str:
 
 
 def return_correct_label(label: str) -> int:
-    key = label.split('.')[0]
-    if key == "H-0":
+    key = label.split('-')[0]
+    if key == "Num0":
         return 0
-    if key == "H-1":
+    if key == "Num1":
         return 1
-    if key == "H-2":
+    if key == "Num2":
         return 2
-    if key == "H-3":
+    if key == "Num3":
         return 3
-    if key == "H-4":
+    if key == "Num4":
         return 4
-    if key == "H-5":
+    if key == "Num5":
         return 5
-    if key == "H-6":
+    if key == "Num6":
         return 6
-    if key == "H-7":
+    if key == "Num7":
         return 7
-    if key == "H-8":
+    if key == "Num8":
         return 8
-    if key == "H-9":
+    if key == "Num9":
         return 9
-    if key == "H-DecreaseFanSpeed":
+    if key == "FanDown":
         return 10
-    if key == "H-FanOn":
-        return 11
-    if key == "H-FanOff":
+    if key == "FanOff":
         return 12
-    if key == "H-IncreaseFanSpeed":
+    if key == "FanOn":
+        return 11
+    if key == "FanUp":
         return 13
-    if key == "H-LightOff":
+    if key == "LightOff":
         return 14
-    if key == "H-LightOn":
+    if key == "LightOn":
         return 15
-    if key == "H-SetThermo":
+    if key == "SetThermo":
         return 16
-    # key = label.split('-')[0]
-    # if key == "Num0":
-    #     return "0"
-    # if key == "Num1":
-    #     return "1"
-    # if key == "Num2":
-    #     return "2"
-    # if key == "Num3":
-    #     return "3"
-    # if key == "Num4":
-    #     return "4"
-    # if key == "Num5":
-    #     return "5"
-    # if key == "Num6":
-    #     return "6"
-    # if key == "Num7":
-    #     return "7"
-    # if key == "Num8":
-    #     return "8"
-    # if key == "Num9":
-    #     return "9"
-    # if key == "FanDown":
-    #     return "10"
-    # if key == "FanOff":
-    #     return "12"
-    # if key == "FanOn":
-    #     return "11"
-    # if key == "FanUp":
-    #     return "13"
-    # if key == "LightOff":
-    #     return "14"
-    # if key == "LightOn":
-    #     return "15"
-    # if key == "SetThermo":
-    #     return "16"
 
 
 def find_comparable_vectors(lookup_key, dictionary) -> []:

@@ -11,8 +11,8 @@ import tensorflow as tf
 import frameextractor
 import csv
 import handshape_feature_extractor as handshape
-from utils import define_gesture, last_file_in_folder, find_train_data_equivalent_key, find_comparable_vectors, \
-    return_correct_label
+from utils import last_file_in_folder, find_train_data_equivalent_key, find_comparable_vectors, \
+    return_correct_label, define_train_gesture, define_test_gesture
 
 ## import the handfeature extractor class
 
@@ -31,7 +31,7 @@ handshape_obj = handshape.HandShapeFeatureExtractor
 for filename in os.listdir(training_directory):
     file = os.path.join(training_directory, filename)
     frameextractor.frameExtractor(file, train_middle_frames_directory, train_count)
-    gesture = define_gesture(filename, train_count)
+    gesture = define_train_gesture(filename, train_count)
     lastFile = last_file_in_folder(train_middle_frames_directory)
     image = cv2.imread(lastFile, cv2.IMREAD_GRAYSCALE)
     train_vector_list[gesture] = (handshape_obj.extract_feature(handshape_obj.get_instance(), image))
@@ -50,7 +50,7 @@ test_vector_list = {}
 for filename in os.listdir(test_directory):
     file = os.path.join(test_directory, filename)
     frameextractor.frameExtractor(file, test_middle_frames_directory, test_count)
-    gesture = define_gesture(filename, test_count)
+    gesture = define_test_gesture(filename, test_count)
     lastFile = last_file_in_folder(test_middle_frames_directory)
     image = cv2.imread(lastFile, cv2.IMREAD_GRAYSCALE)
     test_vector_list[gesture] = (handshape_obj.extract_feature(handshape_obj.get_instance(), image))
@@ -60,14 +60,14 @@ for filename in os.listdir(test_directory):
 # Recognize the gesture (use cosine similarity for comparing the vectors)
 # =============================================================================
 
-with open('Result.csv', 'w', newline='') as results_file:
+with open('Results.csv', 'w', newline='') as results_file:
     headers = ['Output Label']
     file_writer = csv.DictWriter(results_file, fieldnames=headers)
-    for key, value in train_vector_list.items():
+    for key, value in test_vector_list.items():
         minimum_cosine_difference = 1
         correct_label = key
         trainDataEquivalentKey = find_train_data_equivalent_key(key)
-        for compareKey, compareValue in test_vector_list.items():
+        for compareKey, compareValue in train_vector_list.items():
             calculated_difference = tf.keras.losses.cosine_similarity(
                 value, compareValue, axis=-1
             )
